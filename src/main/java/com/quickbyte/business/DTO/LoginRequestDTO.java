@@ -1,6 +1,12 @@
 package com.quickbyte.business.DTO;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class LoginRequestDTO {
+    // Getters and setters
     private String username;
     private String passwordHash;
 
@@ -13,20 +19,4 @@ public class LoginRequestDTO {
         this.passwordHash = passwordHash;
     }
 
-    // Getters and setters
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
 }
