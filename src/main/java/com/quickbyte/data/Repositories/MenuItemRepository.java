@@ -64,4 +64,11 @@ public class MenuItemRepository extends SimpleJpaRepository<MenuItem, Integer> i
                 .setParameter("itemId", itemId)
                 .getSingleResult();
     }
+
+    @Override
+    public List<MenuItem> getAllItems() {
+        return entityManager.createQuery(
+                        "SELECT mi FROM MenuItem mi", MenuItem.class)
+                .getResultList();
+    }
 }

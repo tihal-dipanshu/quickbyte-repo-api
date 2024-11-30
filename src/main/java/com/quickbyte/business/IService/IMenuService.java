@@ -17,4 +17,5 @@ public interface IMenuService {
 
     MenuItemDTO getItemById(int itemId);
 
+    List<MenuItemDTO> getAllItems();
 }

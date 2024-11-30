@@ -24,4 +24,7 @@ public interface IMenuItemRepository extends JpaRepository<MenuItem, Integer> {
 
     @Query("SELECT mi FROM MenuItem mi WHERE mi.itemId = :itemId")
     MenuItem findByItemId(int itemId);
+
+    @Query("SELECT mi FROM MenuItem mi")
+    List<MenuItem> getAllItems();
 }

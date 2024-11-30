@@ -73,6 +73,14 @@ public class MenuService implements IMenuService {
                 .collect(Collectors.toList());
     }
 
+    // New method to get all items
+    @Override
+    public List<MenuItemDTO> getAllItems() {
+        return menuItemRepository.getAllItems().stream()
+                .map(this::convertToMenuItemDTO)
+                .collect(Collectors.toList());
+    }
+
     // Helper methods to convert entities to DTOs
     private MenuCategoryDTO convertToMenuCategoryDTO(MenuCategory category) {
         return new MenuCategoryDTO(
