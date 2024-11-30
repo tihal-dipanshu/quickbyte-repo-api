@@ -81,4 +81,15 @@ public class CustomerHomeController {
                     .body(new ErrorResponseCustom("Error fetching item: " + e.getMessage()));
         }
     }
+
+    @GetMapping("/items")
+    public ResponseEntity<?> getAllItems() {
+        try {
+            List<MenuItemDTO> items = menuService.getAllItems();
+            return ResponseEntity.ok(items);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponseCustom("Error fetching all items: " + e.getMessage()));
+        }
+    }
 }
