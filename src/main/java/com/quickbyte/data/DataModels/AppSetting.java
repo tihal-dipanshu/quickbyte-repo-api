@@ -16,6 +16,9 @@ public class AppSetting {
     @Column(name = "OwnerId")
     @Getter @Setter private Integer ownerId;
 
+    @Column(name = "BusinessName", length = 255)
+    @Getter @Setter private String businessName;
+
     @Column(name = "LogoUrl", length = 255)
     @Getter @Setter private String logoUrl;
 

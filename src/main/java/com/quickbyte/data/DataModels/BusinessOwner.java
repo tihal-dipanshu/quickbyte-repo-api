@@ -23,9 +23,6 @@ public class BusinessOwner {
     @Column(name = "PasswordHash", nullable = false, length = 255)
     @Getter @Setter private String passwordHash;
 
-    @Column(name = "BusinessName", nullable = false, length = 100)
-    @Getter @Setter private String businessName;
-
     @Column(name = "ContactNumber", length = 20)
     @Getter @Setter private String contactNumber;
 
