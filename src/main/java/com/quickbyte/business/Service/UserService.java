@@ -176,6 +176,7 @@ public class UserService implements IUserService {
         dto.setCardNumber(user.getCardNumber());
         dto.setExpiryMonth(user.getExpiryMonth());
         dto.setExpiryYear(user.getExpiryYear());
+        dto.setCVV(user.getCVV());
         dto.setIsDefaultCard(user.getIsDefaultCard());
         return dto;
     }

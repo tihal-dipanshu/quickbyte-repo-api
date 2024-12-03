@@ -59,6 +59,9 @@ public class User {
     @Column(name = "IsDefaultCard")
     private Boolean isDefaultCard;
 
+    @Column(name = "CVV")
+    private Integer CVV;
+
 
 //    @OneToMany(mappedBy = "user")
 //    private List<Order> orders;
@@ -75,7 +78,7 @@ public class User {
     }
 
     // Custom constructor for creating a new user
-    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard) {
+    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, int CVV) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -87,6 +90,7 @@ public class User {
         this.cardNumber = cardNumber;
         this.expiryMonth = expiryMonth;
         this.expiryYear = expiryYear;
+        this.CVV = CVV;
         this.isDefaultCard = isDefaultCard;
     }
 }

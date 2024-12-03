@@ -21,6 +21,7 @@ public class UserDTO {
     private String CardNumber;
     private int ExpiryMonth;
     private int ExpiryYear;
+    private int CVV;
     private Boolean IsDefaultCard;
 
     // Default constructor
@@ -28,7 +29,7 @@ public class UserDTO {
 
     // Constructor with all fields
     public UserDTO(Integer userId, String username, String email, String firstName, String lastName,
-                   String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard) {
+                   String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard, int CVV) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -41,6 +42,7 @@ public class UserDTO {
         this.CardNumber = CardNumber;
         this.ExpiryMonth = ExpiryMonth;
         this.ExpiryYear = ExpiryYear;
+        this.CVV = CVV;
         this.IsDefaultCard = IsDefaultCard;
     }
 
@@ -60,6 +62,7 @@ public class UserDTO {
                 ", CardNumber='" + CardNumber + '\'' +
                 ", ExpiryMonth=" + ExpiryMonth +
                 ", ExpiryYear=" + ExpiryYear +
+                ", CVV=" + CVV +
                 ", IsDefaultCard=" + IsDefaultCard +
                 '}';
     }
