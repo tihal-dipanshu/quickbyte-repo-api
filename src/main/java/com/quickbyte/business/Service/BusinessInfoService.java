@@ -28,21 +28,20 @@ public class BusinessInfoService implements IBusinessInfoService {
     public BusinessInfoDTO getBusinessInfoById(int id) {
         BusinessOwner owner = businessOwnerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Business owner not found with id: " + id));
-        AppSetting settings = appSettingRepository.findByOwnerId(owner.getOwnerId())
+        AppSetting settings = appSettingRepository.findByOwnerId(id)
                 .orElseThrow(() -> new ResourceNotFoundException("App settings not found for owner id: " + id));
 
-        return convertToBusinessInfoDTO(owner, settings);
+        return convertToBusinessInfoDTO(settings);
     }
 
     @Override
-    public BusinessInfoDTO saveBusinessInfo(BusinessInfoDTO businessInfoDTO) {
-        BusinessOwner owner = new BusinessOwner();
-        owner.setBusinessName(businessInfoDTO.getBusinessName());
+    public BusinessInfoDTO saveOrUpdateBusinessInfo(BusinessInfoDTO businessInfoDTO) {
 
-        owner = businessOwnerRepository.save(owner);
+        AppSetting settings = appSettingRepository.findByOwnerId(businessInfoDTO.getOwnerId())
+                .orElse(new AppSetting()); // Create new if not found
 
-        AppSetting settings = new AppSetting();
-        settings.setOwnerId(owner.getOwnerId());
+        settings.setOwnerId(businessInfoDTO.getOwnerId());
+        settings.setBusinessName(businessInfoDTO.getBusinessName());
         settings.setLogoUrl(businessInfoDTO.getLogoUrl());
         settings.setPrimaryColor(businessInfoDTO.getPrimaryColor());
         settings.setSecondaryColor(businessInfoDTO.getSecondaryColor());
@@ -50,37 +49,17 @@ public class BusinessInfoService implements IBusinessInfoService {
 
         appSettingRepository.save(settings);
 
-        return convertToBusinessInfoDTO(owner, settings);
+        return convertToBusinessInfoDTO(settings);
     }
 
-    @Override
-    public BusinessInfoDTO updateBusinessInfo(int id, BusinessInfoDTO businessInfoDTO) {
-        BusinessOwner owner = businessOwnerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Business owner not found with id: " + id));
-
-        AppSetting settings = appSettingRepository.findByOwnerId(owner.getOwnerId())
-                .orElseThrow(() -> new ResourceNotFoundException("App settings not found for owner id: " + id));
-
-        owner.setBusinessName(businessInfoDTO.getBusinessName());
-
-        settings.setLogoUrl(businessInfoDTO.getLogoUrl());
-        settings.setPrimaryColor(businessInfoDTO.getPrimaryColor());
-        settings.setSecondaryColor(businessInfoDTO.getSecondaryColor());
-        settings.setSlogan(businessInfoDTO.getSlogan());
-
-        businessOwnerRepository.save(owner);
-        appSettingRepository.save(settings);
-
-        return convertToBusinessInfoDTO(owner, settings);
-    }
-
-    private BusinessInfoDTO convertToBusinessInfoDTO(BusinessOwner owner, AppSetting settings) {
+    private BusinessInfoDTO convertToBusinessInfoDTO(AppSetting settings) {
         return new BusinessInfoDTO(
-                owner.getBusinessName(),
+                settings.getBusinessName(),
                 settings.getLogoUrl(),
                 settings.getSlogan(),
                 settings.getPrimaryColor(),
-                settings.getSecondaryColor()
+                settings.getSecondaryColor(),
+                settings.getOwnerId()
         );
     }
 }

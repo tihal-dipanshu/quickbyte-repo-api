@@ -38,28 +38,13 @@ public class BusinessInfoController {
 
     // POST method to create new business info
     @PostMapping
-    public ResponseEntity<?> saveBusinessInfo(@RequestBody BusinessInfoDTO businessInfoDTO) {
+    public ResponseEntity<?> saveOrUpdateBusinessInfo(@RequestBody BusinessInfoDTO businessInfoDTO) {
         try {
-            BusinessInfoDTO savedInfo = businessInfoService.saveBusinessInfo(businessInfoDTO);
+            BusinessInfoDTO savedInfo = businessInfoService.saveOrUpdateBusinessInfo(businessInfoDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedInfo);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponseCustom("Error saving business information: " + e.getMessage()));
-        }
-    }
-
-    // PUT method to update existing business info by ID
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateBusinessInfo(@PathVariable int id, @RequestBody BusinessInfoDTO businessInfoDTO) {
-        try {
-            BusinessInfoDTO updatedInfo = businessInfoService.updateBusinessInfo(id, businessInfoDTO);
-            return ResponseEntity.ok(updatedInfo);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorResponseCustom("Business not found: " + e.getMessage()));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ErrorResponseCustom("Error updating business information: " + e.getMessage()));
+                    .body(new ErrorResponseCustom("Error saving or updating business information: " + e.getMessage()));
         }
     }
 }
