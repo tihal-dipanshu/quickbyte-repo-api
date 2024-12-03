@@ -50,6 +50,11 @@ public class UserService implements IUserService {
         user.setPhoneNumber(userCreationDTO.getPhoneNumber());
         user.setIsActive(true);
         user.setCreatedAt(LocalDateTime.now());
+        user.setLoyaltyPoints(0);
+        user.setCardNumber(userCreationDTO.getCardNumber());
+        user.setExpiryMonth(userCreationDTO.getExpiryMonth());
+        user.setExpiryYear(userCreationDTO.getExpiryYear());
+        user.setIsDefaultCard(userCreationDTO.getIsDefaultCard());
 
         User savedUser = userRepository.save(user);
 
