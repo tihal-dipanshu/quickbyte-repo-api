@@ -50,6 +50,17 @@ public class UsersController {
         return ResponseEntity.ok(users);
     }*/
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable int userId) {
+        try {
+            UserDTO user = userService.getUserById(userId);
+            return ResponseEntity.ok(user);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponseCustom("User not found: " + e.getMessage()));
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserCreationRequestDTO newUser) {
         try {
