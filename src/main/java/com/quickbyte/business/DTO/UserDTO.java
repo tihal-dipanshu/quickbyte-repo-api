@@ -17,13 +17,18 @@ public class UserDTO {
     private String phoneNumber;
     private LocalDateTime createdAt;
     private Boolean isActive;
+    private int LoyaltyPoints;
+    private String CardNumber;
+    private int ExpiryMonth;
+    private int ExpiryYear;
+    private Boolean IsDefaultCard;
 
     // Default constructor
     public UserDTO() {}
 
     // Constructor with all fields
     public UserDTO(Integer userId, String username, String email, String firstName, String lastName,
-                   String phoneNumber, LocalDateTime createdAt, Boolean isActive) {
+                   String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -32,6 +37,11 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.createdAt = createdAt;
         this.isActive = isActive;
+        this.LoyaltyPoints = LoyaltyPoints;
+        this.CardNumber = CardNumber;
+        this.ExpiryMonth = ExpiryMonth;
+        this.ExpiryYear = ExpiryYear;
+        this.IsDefaultCard = IsDefaultCard;
     }
 
     // toString method for easy logging/debugging
@@ -46,6 +56,11 @@ public class UserDTO {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", createdAt=" + createdAt +
                 ", isActive=" + isActive +
+                ", LoyaltyPoints=" + LoyaltyPoints +
+                ", CardNumber='" + CardNumber + '\'' +
+                ", ExpiryMonth=" + ExpiryMonth +
+                ", ExpiryYear=" + ExpiryYear +
+                ", IsDefaultCard=" + IsDefaultCard +
                 '}';
     }
 }
