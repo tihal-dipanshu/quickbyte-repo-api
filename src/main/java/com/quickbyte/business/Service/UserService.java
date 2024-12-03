@@ -167,6 +167,11 @@ public class UserService implements IUserService {
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setCreatedAt(user.getCreatedAt());
         dto.setIsActive(user.getIsActive());
+        dto.setLoyaltyPoints(user.getLoyaltyPoints());
+        dto.setCardNumber(user.getCardNumber());
+        dto.setExpiryMonth(user.getExpiryMonth());
+        dto.setExpiryYear(user.getExpiryYear());
+        dto.setIsDefaultCard(user.getIsDefaultCard());
         return dto;
     }
 }

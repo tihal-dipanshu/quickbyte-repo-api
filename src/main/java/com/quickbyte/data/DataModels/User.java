@@ -44,6 +44,22 @@ public class User {
     @Column(name = "IsActive")
     private Boolean isActive;
 
+    @Column(name = "LoyaltyPoints", nullable = false)
+    private int loyaltyPoints;
+
+    @Column(name = "CardNumber", length = 19)
+    private String cardNumber;
+
+    @Column(name = "ExpiryMonth")
+    private Integer expiryMonth;
+
+    @Column(name = "ExpiryYear")
+    private Integer expiryYear;
+
+    @Column(name = "IsDefaultCard")
+    private Boolean isDefaultCard;
+
+
 //    @OneToMany(mappedBy = "user")
 //    private List<Order> orders;
 //
@@ -59,7 +75,7 @@ public class User {
     }
 
     // Custom constructor for creating a new user
-    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber) {
+    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -67,5 +83,10 @@ public class User {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.isActive = true;
+        this.loyaltyPoints = loyaltyPoints;
+        this.cardNumber = cardNumber;
+        this.expiryMonth = expiryMonth;
+        this.expiryYear = expiryYear;
+        this.isDefaultCard = isDefaultCard;
     }
 }
