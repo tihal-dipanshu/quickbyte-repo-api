@@ -14,24 +14,16 @@ public class MenuCategoryDTO {
     @Setter
     @Getter
     private String description;
-    private boolean isActive;
 
     // Default constructor
     public MenuCategoryDTO() {}
 
     // Constructor with all fields
-    public MenuCategoryDTO(int categoryId, String name, String description, boolean isActive) {
+    public MenuCategoryDTO(int categoryId, String name, String description) {
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
-        this.isActive = isActive;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
+    // Override toString method
 }
