@@ -35,6 +35,7 @@ public class MenuCategory {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MenuItem> menuItems;
 
+
     public boolean isActive() {
         return isActive;
     }

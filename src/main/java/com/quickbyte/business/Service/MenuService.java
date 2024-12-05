@@ -86,8 +86,7 @@ public class MenuService implements IMenuService {
         return new MenuCategoryDTO(
                 category.getCategoryId(),
                 category.getName(),
-                category.getDescription(),
-                category.isActive()
+                category.getDescription()
         );
     }
 
