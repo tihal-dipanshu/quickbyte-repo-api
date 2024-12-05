@@ -12,7 +12,7 @@ public class MenuItemDTO {
     private int itemId;
     @Setter
     @Getter
-    private int categoryId;
+    private Integer categoryId;
     @Setter
     @Getter
     private String name;
