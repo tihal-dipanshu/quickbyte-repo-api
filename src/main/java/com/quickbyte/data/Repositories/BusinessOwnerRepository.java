@@ -26,4 +26,18 @@ public class BusinessOwnerRepository extends SimpleJpaRepository<BusinessOwner, 
                 .stream()
                 .findFirst();
     }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return entityManager.createQuery("SELECT COUNT(bo) FROM BusinessOwner bo WHERE bo.username = :username", Long.class)
+                .setParameter("username", username)
+                .getSingleResult() > 0;
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return entityManager.createQuery("SELECT COUNT(bo) FROM BusinessOwner bo WHERE bo.email = :email", Long.class)
+                .setParameter("email", email)
+                .getSingleResult() > 0;
+    }
 }
