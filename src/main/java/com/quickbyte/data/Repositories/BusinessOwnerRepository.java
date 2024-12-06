@@ -40,4 +40,12 @@ public class BusinessOwnerRepository extends SimpleJpaRepository<BusinessOwner, 
                 .setParameter("email", email)
                 .getSingleResult() > 0;
     }
+
+    @Override
+    public Optional<BusinessOwner> findByUsername(String username) {
+        return entityManager.createQuery("SELECT bo FROM BusinessOwner bo WHERE bo.username = :username", BusinessOwner.class)
+                .setParameter("username", username)
+                .getResultStream()
+                .findFirst();
+    }
 }
