@@ -16,6 +16,8 @@ public interface IOrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByUser_UserId(Integer userId);
     List<Order> findOrdersByStatus(String status);
 
+    //List<Order> findByUserId(Integer userId);
+
     @Modifying
     @Transactional
     @Query("UPDATE Order o SET o.status = :status WHERE o.orderId = :orderId")

@@ -12,4 +12,5 @@ public interface IOrderService {
     void deleteOrder(Integer orderId);
     OrderDTO updateOrder(Integer orderId, OrderDTO orderDTO);
     void updateOrderStatus(Integer orderId, String status);
+    List<OrderDTO> getOrdersByUserId(Integer userId);
 }
