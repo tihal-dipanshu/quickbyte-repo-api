@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "MenuCategories")
 public class MenuCategory {
-    // Getters and Setters
     @Setter
     @Getter
     @Id

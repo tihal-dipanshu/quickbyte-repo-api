@@ -30,4 +30,15 @@ public class CreateMenuItemDTO {
         this.price = price;
         this.imageUrl = imageUrl;
     }
+
+    @Override
+    public String toString() {
+        return "CreateMenuItemDTO{" +
+                "categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

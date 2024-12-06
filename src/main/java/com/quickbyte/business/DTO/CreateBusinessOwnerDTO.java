@@ -9,10 +9,9 @@ public class CreateBusinessOwnerDTO {
 
     private String username;
     private String email;
-    private String passwordHash; // Consider excluding this in real-world scenarios for security reasons
+    private String passwordHash;
     private String contactNumber;
 
-    // Constructors
     public CreateBusinessOwnerDTO() {}
 
     public CreateBusinessOwnerDTO(String username, String email, String passwordHash,
@@ -21,5 +20,15 @@ public class CreateBusinessOwnerDTO {
         this.email = email;
         this.passwordHash = passwordHash;
         this.contactNumber = contactNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateBusinessOwnerDTO{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                '}';
     }
 }

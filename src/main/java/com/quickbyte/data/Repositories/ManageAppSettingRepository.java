@@ -22,9 +22,6 @@ public class ManageAppSettingRepository extends SimpleJpaRepository<ManageAppSet
         this.entityManager = entityManager;
     }
 
-    // Custom query methods can be added here if needed
-
-
     @Override
     public Optional<ManageAppSetting> findByOwner_OwnerId(Integer ownerId) {
         return entityManager.createQuery("SELECT a FROM ManageAppSetting a WHERE a.owner.ownerId = :ownerId", ManageAppSetting.class)

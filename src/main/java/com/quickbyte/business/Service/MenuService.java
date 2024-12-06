@@ -93,12 +93,12 @@ public class MenuService implements IMenuService {
     private MenuItemDTO convertToMenuItemDTO(MenuItem item) {
         return new MenuItemDTO(
                 item.getItemId(),
-                item.getCategory().getCategoryId(), // Change this line
+                item.getCategory().getCategoryId(),
                 item.getName(),
                 item.getDescription(),
                 item.getPrice(),
                 item.getImageUrl(),
-                item.isAvailable() // Change this line if necessary
+                item.isAvailable()
         );
     }
 }

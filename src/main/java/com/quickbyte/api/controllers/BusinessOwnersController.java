@@ -76,8 +76,4 @@ public class BusinessOwnersController {
                     .body(new ErrorResponseCustom("Invalid input: " + e.getMessage()));
         }
     }
-
-
-
-
 }

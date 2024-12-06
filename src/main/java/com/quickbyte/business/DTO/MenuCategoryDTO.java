@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class MenuCategoryDTO {
-    // Getters and setters
     @Setter
     @Getter
     private int categoryId;
@@ -15,15 +14,21 @@ public class MenuCategoryDTO {
     @Getter
     private String description;
 
-    // Default constructor
     public MenuCategoryDTO() {}
 
-    // Constructor with all fields
     public MenuCategoryDTO(int categoryId, String name, String description) {
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
     }
 
-    // Override toString method
+    @Override
+    public String toString() {
+        return "MenuCategoryDTO{" +
+                "categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }

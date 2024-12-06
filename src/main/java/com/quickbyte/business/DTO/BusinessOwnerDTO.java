@@ -10,11 +10,10 @@ public class BusinessOwnerDTO {
     private Integer ownerId;
     private String username;
     private String email;
-    private String passwordHash; // Consider excluding this in real-world scenarios for security reasons
+    private String passwordHash;
     private String contactNumber;
     private java.sql.Timestamp createdAt;
 
-    // Constructors
     public BusinessOwnerDTO() {}
 
     public BusinessOwnerDTO(Integer ownerId, String username, String email, String passwordHash,
@@ -25,5 +24,17 @@ public class BusinessOwnerDTO {
         this.passwordHash = passwordHash;
         this.contactNumber = contactNumber;
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "BusinessOwnerDTO{" +
+                "ownerId=" + ownerId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

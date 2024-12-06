@@ -2,7 +2,6 @@ package com.quickbyte.business.IService;
 
 import com.quickbyte.business.DTO.BusinessOwnerDTO;
 import com.quickbyte.business.DTO.CreateBusinessOwnerDTO;
-
 import java.util.List;
 
 public interface IBusinessOwnerService {

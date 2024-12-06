@@ -16,4 +16,12 @@ public class CreateOrderDTO {
         this.userId = userId;
         this.orderItems = orderItems;
     }
+
+    @Override
+    public String toString() {
+        return "CreateOrderDTO{" +
+                "userId=" + userId +
+                ", orderItems=" + orderItems +
+                '}';
+    }
 }

@@ -18,10 +18,9 @@ public class UserCreationRequestDTO {
     private int expiryYear;
     private int CVV;
     private Boolean isDefaultCard;
-    // Default constructor
+
     public UserCreationRequestDTO() {}
 
-    // Constructor with all fields
     public UserCreationRequestDTO(String username, String email, String password,
                                   String firstName, String lastName, String phoneNumber, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, int CVV) {
         this.username = username;
@@ -35,7 +34,23 @@ public class UserCreationRequestDTO {
         this.expiryYear = expiryYear;
         this.isDefaultCard = isDefaultCard;
         this.CVV = CVV;
+    }
 
+    @Override
+    public String toString() {
+        return "UserCreationRequestDTO{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", expiryMonth=" + expiryMonth +
+                ", expiryYear=" + expiryYear +
+                ", CVV=" + CVV +
+                ", isDefaultCard=" + isDefaultCard +
+                '}';
     }
 
 }

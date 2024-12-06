@@ -21,7 +21,6 @@ public class BusinessInfoController {
         this.businessInfoService = businessInfoService;
     }
 
-    // GET method to retrieve business info by ID
     @GetMapping("/{id}")
     public ResponseEntity<?> getBusinessInfo(@PathVariable int id) {
         try {
@@ -36,7 +35,6 @@ public class BusinessInfoController {
         }
     }
 
-    // POST method to create new business info
     @PostMapping
     public ResponseEntity<?> saveOrUpdateBusinessInfo(@RequestBody BusinessInfoDTO businessInfoDTO) {
         try {
