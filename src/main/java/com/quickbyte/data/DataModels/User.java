@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -20,7 +19,7 @@ public class User {
     @Column(name = "UserId")
     private Integer userId;
 
-    @Column(name = "Username", unique = true, nullable = false, length = 50)
+    @Column(name = "Username", nullable = false, length = 50)
     private String username;
 
     @Column(name = "Email", unique = true, nullable = false, length = 100)
@@ -62,13 +61,6 @@ public class User {
     @Column(name = "CVV")
     private Integer CVV;
 
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Order> orders;
-//
-//    @OneToOne(mappedBy = "user")
-//    private LoyaltyPoints loyaltyPoints;
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -77,7 +69,6 @@ public class User {
         }
     }
 
-    // Custom constructor for creating a new user
     public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, int CVV) {
         this.username = username;
         this.email = email;
