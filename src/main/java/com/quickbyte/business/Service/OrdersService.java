@@ -116,6 +116,13 @@ public class OrdersService implements IOrderService {
         orderRepository.save(order);
     }
 
+    @Override
+    public List<OrderDTO> getOrdersByUserId(Integer userId) {
+        return orderRepository.findByUser_UserId(userId).stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+
     private OrderDTO convertToDTO(Order order) {
         return new OrderDTO(
                 order.getOrderId(),

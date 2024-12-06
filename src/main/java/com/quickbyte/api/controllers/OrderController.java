@@ -84,4 +84,10 @@ public class OrderController {
                     .body(new ErrorResponseCustom("Order not found: " + e.getMessage()));
         }
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<OrderDTO>> getOrdersByUserId(@PathVariable Integer userId) {
+        List<OrderDTO> orders = orderService.getOrdersByUserId(userId);
+        return ResponseEntity.ok(orders);
+    }
 }
