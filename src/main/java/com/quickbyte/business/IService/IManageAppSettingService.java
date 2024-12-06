@@ -1,6 +1,6 @@
 package com.quickbyte.business.IService;
-import com.quickbyte.business.DTO.AppSettingDTO;
 
+import com.quickbyte.business.DTO.AppSettingDTO;
 import java.util.List;
 
 public interface IManageAppSettingService {

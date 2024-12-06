@@ -15,10 +15,8 @@ public class AppSettingDTO {
     private String secondaryColor;
     private String slogan;
 
-    // Default constructor
     public AppSettingDTO() {}
 
-    // Constructor with all fields
     public AppSettingDTO(int settingId, int ownerId, String businessName, String logoUrl,
                          String primaryColor, String secondaryColor, String slogan) {
         this.settingId = settingId;

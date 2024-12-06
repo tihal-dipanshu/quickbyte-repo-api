@@ -34,5 +34,4 @@ public class MenuCategoryRepository extends SimpleJpaRepository<MenuCategory, In
         return count > 0;
     }
 
-    // You can add more custom methods here if needed
 }

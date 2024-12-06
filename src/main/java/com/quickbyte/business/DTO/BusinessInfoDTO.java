@@ -24,4 +24,16 @@ public class BusinessInfoDTO {
         this.secondaryColor = secondaryColor;
 
     }
+
+    @Override
+    public String toString() {
+        return "BusinessInfoDTO{" +
+                "ownerId=" + ownerId +
+                ", businessName='" + businessName + '\'' +
+                ", logoUrl='" + logoUrl + '\'' +
+                ", slogan='" + slogan + '\'' +
+                ", primaryColor='" + primaryColor + '\'' +
+                ", secondaryColor='" + secondaryColor + '\'' +
+                '}';
+    }
 }

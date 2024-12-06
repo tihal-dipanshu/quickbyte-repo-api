@@ -19,4 +19,12 @@ public class CreateMenuCategoryDTO {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "CreateMenuCategoryDTO{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }

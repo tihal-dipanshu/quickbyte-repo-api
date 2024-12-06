@@ -6,7 +6,6 @@ import lombok.Setter;
 import java.math.BigDecimal;
 
 public class MenuItemDTO {
-    // Getters and setters
     @Setter
     @Getter
     private int itemId;
@@ -27,10 +26,8 @@ public class MenuItemDTO {
     private String imageUrl;
     private boolean isAvailable;
 
-    // Default constructor
     public MenuItemDTO() {}
 
-    // Constructor with all fields
     public MenuItemDTO(int itemId, int categoryId, String name, String description, BigDecimal price, String imageUrl, boolean isAvailable) {
         this.itemId = itemId;
         this.categoryId = categoryId;
@@ -47,5 +44,18 @@ public class MenuItemDTO {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    }
+
+    @Override
+    public String toString() {
+        return "MenuItemDTO{" +
+                "itemId=" + itemId +
+                ", categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", isAvailable=" + isAvailable +
+                '}';
     }
 }

@@ -2,6 +2,7 @@ package com.quickbyte.business.Service;
 
 import com.quickbyte.business.DTO.BusinessOwnerDTO;
 import com.quickbyte.business.DTO.CreateBusinessOwnerDTO;
+import com.quickbyte.business.DTO.LoginRequestDTO;
 import com.quickbyte.business.IService.IBusinessOwnerService;
 import com.quickbyte.common.exceptions.BusinessOwnerNotFoundException;
 import com.quickbyte.data.DataModels.BusinessOwner;
@@ -79,6 +80,18 @@ public class BusinessOwnerService implements IBusinessOwnerService {
         existing.setEmail(dto.getEmail());
         existing.setPasswordHash(dto.getPasswordHash());
         existing.setContactNumber(dto.getContactNumber());
+    }
+
+    @Override
+    public BusinessOwnerDTO loginBusinessOwner(String username, String password) {
+        BusinessOwner business = businessOwnerRepository.findByUsername(username)
+                .orElseThrow(() -> new BusinessOwnerNotFoundException("No business owner found for username: " + username));
+
+        if (!business.getPasswordHash().equals(password)) {
+            throw new IllegalArgumentException("Invalid password");
+        }
+
+        return convertToDTO(business);
     }
 
     private BusinessOwner convertToEntity(CreateBusinessOwnerDTO dto) {

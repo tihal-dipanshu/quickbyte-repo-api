@@ -8,10 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IMenuCategoryRepository extends JpaRepository<MenuCategory, Integer> {
-
-    // Fetch all active categories
     List<MenuCategory> findByIsActiveTrue();
-
-    // Check if a category exists by its ID
     boolean existsById(int categoryId);
 }

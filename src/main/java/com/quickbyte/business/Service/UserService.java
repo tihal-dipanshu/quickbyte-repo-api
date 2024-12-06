@@ -159,7 +159,7 @@ public class UserService implements IUserService {
 
     private String hashPassword(String password) {
         // Implement proper password hashing here
-        return password; // This is just a placeholder, use proper hashing in production
+        return password;
     }
 
     private UserDTO convertToDTO(User user) {

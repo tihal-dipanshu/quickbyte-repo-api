@@ -30,4 +30,17 @@ public class OrderDTO {
         this.estimatedPickupTime = estimatedPickupTime;
         this.orderItems = orderItems;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDTO{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", orderDate=" + orderDate +
+                ", totalAmount=" + totalAmount +
+                ", status='" + status + '\'' +
+                ", estimatedPickupTime=" + estimatedPickupTime +
+                ", orderItems=" + orderItems +
+                '}';
+    }
 }

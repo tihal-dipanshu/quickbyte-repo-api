@@ -7,7 +7,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "AppSettings")
 public class AppSetting {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SettingId")

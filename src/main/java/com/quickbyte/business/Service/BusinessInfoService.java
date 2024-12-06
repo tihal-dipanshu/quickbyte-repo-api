@@ -38,7 +38,7 @@ public class BusinessInfoService implements IBusinessInfoService {
     public BusinessInfoDTO saveOrUpdateBusinessInfo(BusinessInfoDTO businessInfoDTO) {
 
         AppSetting settings = appSettingRepository.findByOwnerId(businessInfoDTO.getOwnerId())
-                .orElse(new AppSetting()); // Create new if not found
+                .orElse(new AppSetting());
 
         settings.setOwnerId(businessInfoDTO.getOwnerId());
         settings.setBusinessName(businessInfoDTO.getBusinessName());

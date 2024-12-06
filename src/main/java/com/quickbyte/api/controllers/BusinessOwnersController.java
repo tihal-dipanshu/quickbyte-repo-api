@@ -2,10 +2,10 @@ package com.quickbyte.api.controllers;
 
 import com.quickbyte.business.DTO.BusinessOwnerDTO;
 import com.quickbyte.business.DTO.CreateBusinessOwnerDTO;
+import com.quickbyte.business.DTO.LoginRequestDTO;
+import com.quickbyte.business.DTO.UserDTO;
 import com.quickbyte.business.IService.IBusinessOwnerService;
-import com.quickbyte.common.exceptions.ErrorResponseCustom;
-import com.quickbyte.common.exceptions.InvalidInputException;
-import com.quickbyte.common.exceptions.BusinessOwnerNotFoundException;
+import com.quickbyte.common.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,7 +77,17 @@ public class BusinessOwnersController {
         }
     }
 
-
-
-
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequestDTO loginRequest) {
+        try {
+            BusinessOwnerDTO userDTO = businessOwnerService.loginBusinessOwner(loginRequest.getUsername(), loginRequest.getPasswordHash());
+            return ResponseEntity.ok(userDTO);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorResponseCustom("User not found"));
+        } catch (InvalidCredentialsException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(new ErrorResponseCustom("Invalid credentials"));
+        }
+    }
 }

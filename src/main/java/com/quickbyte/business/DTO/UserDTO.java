@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 public class UserDTO {
-    // Getters and setters
     private Integer userId;
     private String username;
     private String email;
@@ -24,10 +23,8 @@ public class UserDTO {
     private int CVV;
     private Boolean IsDefaultCard;
 
-    // Default constructor
     public UserDTO() {}
 
-    // Constructor with all fields
     public UserDTO(Integer userId, String username, String email, String firstName, String lastName,
                    String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard, int CVV) {
         this.userId = userId;
@@ -46,7 +43,6 @@ public class UserDTO {
         this.IsDefaultCard = IsDefaultCard;
     }
 
-    // toString method for easy logging/debugging
     @Override
     public String toString() {
         return "UserDTO{" +

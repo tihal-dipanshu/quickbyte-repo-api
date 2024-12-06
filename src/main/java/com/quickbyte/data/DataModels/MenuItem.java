@@ -10,8 +10,6 @@ import java.util.List;
 @Entity
 @Table(name = "MenuItems")
 public class MenuItem {
-
-    // Getters and Setters
     @Setter
     @Getter
     @Id
