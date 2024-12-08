@@ -82,16 +82,39 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public UserDTO updateUser(Integer userId, UserDTO userDTO) {
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new UserNotFoundException("User not found"));
+//
+//        user.setFirstName(userDTO.getFirstName());
+//        user.setLastName(userDTO.getLastName());
+//        user.setEmail(userDTO.getEmail());
+//        user.setPhoneNumber(userDTO.getPhoneNumber());
+//        user.setIsActive(userDTO.getIsActive());
+//
+//        User updatedUser = userRepository.save(user);
+//        return convertToDTO(updatedUser);
+//    }
+
     @Override
     public UserDTO updateUser(Integer userId, UserDTO userDTO) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
+        user.setUsername(userDTO.getUsername());
+        user.setEmail(userDTO.getEmail());
+        user.setXxx(userDTO.getXxx());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
         user.setPhoneNumber(userDTO.getPhoneNumber());
         user.setIsActive(userDTO.getIsActive());
+        user.setLoyaltyPoints(userDTO.getLoyaltyPoints());
+        user.setCardNumber(userDTO.getCardNumber());
+        user.setExpiryMonth(userDTO.getExpiryMonth());
+        user.setExpiryYear(userDTO.getExpiryYear());
+        user.setCVV(userDTO.getCVV());
+        user.setIsDefaultCard(userDTO.getIsDefaultCard());
 
         User updatedUser = userRepository.save(user);
         return convertToDTO(updatedUser);
