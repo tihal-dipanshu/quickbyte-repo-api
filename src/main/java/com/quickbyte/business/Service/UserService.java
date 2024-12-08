@@ -44,7 +44,7 @@ public class UserService implements IUserService {
         User user = new User();
         user.setUsername(userCreationDTO.getUsername());
         user.setEmail(userCreationDTO.getEmail());
-        user.setPasswordHash(hashPassword(userCreationDTO.getPassword()));
+        user.setXxx(hashPassword(userCreationDTO.getPassword()));
         user.setFirstName(userCreationDTO.getFirstName());
         user.setLastName(userCreationDTO.getLastName());
         user.setPhoneNumber(userCreationDTO.getPhoneNumber());
@@ -110,7 +110,7 @@ public class UserService implements IUserService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        if (!user.getPasswordHash().equals(hashPassword(password))) {
+        if (!user.getXxx().equals(hashPassword(password))) {
             throw new InvalidCredentialsException("Invalid credentials");
         }
 
@@ -166,7 +166,7 @@ public class UserService implements IUserService {
         dto.setUserId(user.getUserId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
-        dto.setPasswordHash(user.getPasswordHash());
+        dto.setXxx(user.getXxx());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setPhoneNumber(user.getPhoneNumber());
