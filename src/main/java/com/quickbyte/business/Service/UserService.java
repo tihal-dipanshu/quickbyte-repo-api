@@ -104,7 +104,11 @@ public class UserService implements IUserService {
 
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-        user.setXxx(userDTO.getXxx());
+        if(userDTO.getXxx() != null){
+            user.setXxx(hashPassword(userDTO.getXxx()));
+        } else {
+            user.setXxx(user.getXxx());
+        }
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
         user.setPhoneNumber(userDTO.getPhoneNumber());
@@ -115,6 +119,8 @@ public class UserService implements IUserService {
         user.setExpiryYear(userDTO.getExpiryYear());
         user.setCVV(userDTO.getCVV());
         user.setIsDefaultCard(userDTO.getIsDefaultCard());
+
+
 
         User updatedUser = userRepository.save(user);
         return convertToDTO(updatedUser);
