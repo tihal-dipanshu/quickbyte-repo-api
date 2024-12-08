@@ -69,7 +69,7 @@ public class User {
         }
     }
 
-    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, int CVV) {
+    public User(String username, String email, String passwordHash, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, Integer CVV) {
         this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;

@@ -6,7 +6,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UserCreationRequestDTO {
-    // Getters and setters
     private String username;
     private String email;
     private String password;
@@ -16,13 +15,13 @@ public class UserCreationRequestDTO {
     private String cardNumber;
     private int expiryMonth;
     private int expiryYear;
-    private int CVV;
+    private Integer CVV;
     private Boolean isDefaultCard;
 
     public UserCreationRequestDTO() {}
 
     public UserCreationRequestDTO(String username, String email, String password,
-                                  String firstName, String lastName, String phoneNumber, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, int CVV) {
+                                  String firstName, String lastName, String phoneNumber, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, Integer CVV) {
         this.username = username;
         this.email = email;
         this.password = password;
