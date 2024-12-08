@@ -55,7 +55,6 @@ public class UserService implements IUserService {
         user.setExpiryMonth(userCreationDTO.getExpiryMonth());
         user.setExpiryYear(userCreationDTO.getExpiryYear());
         user.setIsDefaultCard(userCreationDTO.getIsDefaultCard());
-        user.setCVV(userCreationDTO.getCVV());
 
         User savedUser = userRepository.save(user);
 
@@ -155,21 +154,6 @@ public class UserService implements IUserService {
         if (dto.getPassword() == null || dto.getPassword().trim().isEmpty()) {
             throw new InvalidInputException("Password cannot be empty");
         }
-        if (dto.getFirstName() == null || dto.getFirstName().trim().isEmpty()) {
-            throw new InvalidInputException("First name cannot be empty");
-        }
-        if (dto.getLastName() == null || dto.getLastName().trim().isEmpty()) {
-            throw new InvalidInputException("Last name cannot be empty");
-        }
-        if (dto.getPhoneNumber() == null || dto.getPhoneNumber().trim().isEmpty()) {
-            throw new InvalidInputException("Phone number cannot be empty");
-        }
-        if (dto.getCardNumber() == null || dto.getCardNumber().trim().isEmpty()) {
-            throw new InvalidInputException("Card number cannot be empty");
-        }
-        if (dto.getCVV() < 100 || dto.getCVV() > 999) { // CVV is a 3-digit integer
-            throw new InvalidInputException("CVV must be a 3-digit number");
-        }
     }
 
     private String hashPassword(String password) {
@@ -182,6 +166,7 @@ public class UserService implements IUserService {
         dto.setUserId(user.getUserId());
         dto.setUsername(user.getUsername());
         dto.setEmail(user.getEmail());
+        dto.setPasswordHash(user.getPasswordHash());
         dto.setFirstName(user.getFirstName());
         dto.setLastName(user.getLastName());
         dto.setPhoneNumber(user.getPhoneNumber());
