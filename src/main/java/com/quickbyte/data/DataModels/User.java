@@ -26,7 +26,7 @@ public class User {
     private String email;
 
     @Column(name = "PasswordHash", nullable = false, length = 255)
-    private String xxx;
+    private String passwordHash;
 
     @Column(name = "FirstName", length = 50)
     private String firstName;
@@ -72,7 +72,7 @@ public class User {
     public User(String username, String email, String xxx, String firstName, String lastName, String phoneNumber, int loyaltyPoints, String cardNumber, int expiryMonth, int expiryYear, Boolean isDefaultCard, Integer CVV) {
         this.username = username;
         this.email = email;
-        this.xxx = xxx;
+        this.passwordHash = xxx;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
