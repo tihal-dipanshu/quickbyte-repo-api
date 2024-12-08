@@ -11,7 +11,7 @@ public class UserDTO {
     private Integer userId;
     private String username;
     private String email;
-    private String xxx;
+    private String passwordHash;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -27,11 +27,11 @@ public class UserDTO {
     public UserDTO() {}
 
     public UserDTO(Integer userId, String username, String email, String firstName, String lastName,
-                   String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard, int CVV, String xxx) {
+                   String phoneNumber, LocalDateTime createdAt, Boolean isActive, int LoyaltyPoints, String CardNumber, int ExpiryMonth, int ExpiryYear, Boolean IsDefaultCard, int CVV, String passwordHash) {
         this.userId = userId;
         this.username = username;
         this.email = email;
-        this.xxx = xxx;
+        this.passwordHash = passwordHash;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -51,7 +51,7 @@ public class UserDTO {
                 "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", passwordHash='" + xxx + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
