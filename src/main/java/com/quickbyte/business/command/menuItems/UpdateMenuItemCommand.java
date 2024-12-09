@@ -53,7 +53,11 @@ public class UpdateMenuItemCommand implements MenuItemCommand<MenuItemDTO> {
         menuItem.setName(dto.getName());
         menuItem.setDescription(dto.getDescription());
         menuItem.setPrice(dto.getPrice());
-        menuItem.setImageUrl(dto.getImageUrl());
+        if(dto.getImageUrl() != null && !dto.getImageUrl().isEmpty()) {
+            menuItem.setImageUrl(dto.getImageUrl());
+        } else {
+            menuItem.setImageUrl(menuItem.getImageUrl());
+        }
         menuItem.setAvailable(dto.isAvailable());
     }
 
