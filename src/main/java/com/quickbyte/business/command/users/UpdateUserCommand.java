@@ -32,7 +32,7 @@ public class UpdateUserCommand implements UserCommand<UserDTO> {
     private void updateUserFields(User user, UserDTO userDTO) {
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
-        if (userDTO.getPasswordHash() != null) {
+        if (userDTO.getPasswordHash() != null && !userDTO.getPasswordHash().isEmpty() && !userDTO.getPasswordHash().isBlank() && userDTO.getPasswordHash().length() > 0) {
             user.setPasswordHash(hashPassword(userDTO.getPasswordHash()));
         }
         user.setFirstName(userDTO.getFirstName());
