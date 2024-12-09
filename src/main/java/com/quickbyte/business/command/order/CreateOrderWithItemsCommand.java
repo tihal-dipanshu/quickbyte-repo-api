@@ -52,7 +52,9 @@ public class CreateOrderWithItemsCommand implements OrderCommand<OrderDTO> {
             orderItem.setMenuItem(menuItem);
             orderItem.setQuantity(item.getQuantity());
             BigDecimal subtotal = menuItem.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()));
+            orderItem.setSubtotal(subtotal);
             totalAmount = totalAmount.add(subtotal);
+            orderItem.setUnitPrice(menuItem.getPrice());
 
             order.addOrderItem(orderItem);
         }
