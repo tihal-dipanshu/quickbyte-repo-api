@@ -3,20 +3,12 @@ package com.quickbyte.business.Service;
 import com.quickbyte.business.DTO.UserCreationRequestDTO;
 import com.quickbyte.business.DTO.UserDTO;
 import com.quickbyte.business.IService.IUserService;
-import com.quickbyte.common.exceptions.InvalidCredentialsException;
-import com.quickbyte.common.exceptions.InvalidInputException;
-import com.quickbyte.common.exceptions.UserNotFoundException;
-import com.quickbyte.common.exceptions.UserAlreadyExistsException;
-import com.quickbyte.data.DataModels.*;
+import com.quickbyte.business.command.users.*;
 import com.quickbyte.data.IRepositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -29,184 +21,58 @@ public class UserService implements IUserService {
         this.userRepository = userRepository;
     }
 
+    public <T> T executeCommand(UserCommand<T> command) {
+        return command.execute();
+    }
+
     @Override
     @Transactional
     public UserDTO createUser(UserCreationRequestDTO userCreationDTO) {
-        validateUserCreationInput(userCreationDTO);
-
-        if (userRepository.existsByUsername(userCreationDTO.getUsername())) {
-            throw new UserAlreadyExistsException("Username already exists");
-        }
-        if (userRepository.existsByEmail(userCreationDTO.getEmail())) {
-            throw new UserAlreadyExistsException("Email already exists");
-        }
-
-        User user = new User();
-        user.setUsername(userCreationDTO.getUsername());
-        user.setEmail(userCreationDTO.getEmail());
-        user.setPasswordHash(hashPassword(userCreationDTO.getPassword()));
-        user.setFirstName(userCreationDTO.getFirstName());
-        user.setLastName(userCreationDTO.getLastName());
-        user.setPhoneNumber(userCreationDTO.getPhoneNumber());
-        user.setIsActive(true);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setLoyaltyPoints(0);
-        user.setCardNumber(userCreationDTO.getCardNumber());
-        user.setExpiryMonth(userCreationDTO.getExpiryMonth());
-        user.setExpiryYear(userCreationDTO.getExpiryYear());
-        user.setIsDefaultCard(userCreationDTO.getIsDefaultCard());
-
-        User savedUser = userRepository.save(user);
-
-        return convertToDTO(savedUser);
+        return executeCommand(new CreateUserCommand(userRepository, userCreationDTO));
     }
 
     @Override
     public UserDTO getUserById(Integer id) {
-        return userRepository.findById(id)
-                .map(this::convertToDTO)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return executeCommand(new GetUserByIdCommand(userRepository, id));
     }
 
     @Override
     public UserDTO getUserByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .map(this::convertToDTO)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+        return executeCommand(new GetUserByUsernameCommand(userRepository, username));
     }
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+        return executeCommand(new GetAllUsersCommand(userRepository));
     }
-
-//    @Override
-//    public UserDTO updateUser(Integer userId, UserDTO userDTO) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new UserNotFoundException("User not found"));
-//
-//        user.setFirstName(userDTO.getFirstName());
-//        user.setLastName(userDTO.getLastName());
-//        user.setEmail(userDTO.getEmail());
-//        user.setPhoneNumber(userDTO.getPhoneNumber());
-//        user.setIsActive(userDTO.getIsActive());
-//
-//        User updatedUser = userRepository.save(user);
-//        return convertToDTO(updatedUser);
-//    }
 
     @Override
     public UserDTO updateUser(Integer userId, UserDTO userDTO) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        user.setUsername(userDTO.getUsername());
-        user.setEmail(userDTO.getEmail());
-        if(userDTO.getPasswordHash() != null){
-            user.setPasswordHash(hashPassword(userDTO.getPasswordHash()));
-        } else {
-            user.setPasswordHash(user.getPasswordHash());
-        }
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setPhoneNumber(userDTO.getPhoneNumber());
-        user.setIsActive(userDTO.getIsActive());
-        user.setLoyaltyPoints(userDTO.getLoyaltyPoints());
-        user.setCardNumber(userDTO.getCardNumber());
-        user.setExpiryMonth(userDTO.getExpiryMonth());
-        user.setExpiryYear(userDTO.getExpiryYear());
-        user.setCVV(userDTO.getCVV());
-        user.setIsDefaultCard(userDTO.getIsDefaultCard());
-
-
-
-        User updatedUser = userRepository.save(user);
-        return convertToDTO(updatedUser);
+        return executeCommand(new UpdateUserCommand(userRepository, userId, userDTO));
     }
 
     @Override
     public void deleteUser(Integer id) {
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User not found");
-        }
-        userRepository.deleteById(id);
+        executeCommand(new DeleteUserCommand(userRepository, id));
     }
 
     @Override
     public UserDTO loginUser(String username, String password) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        if (!user.getPasswordHash().equals(hashPassword(password))) {
-            throw new InvalidCredentialsException("Invalid credentials");
-        }
-
-        return convertToDTO(user);
+        return executeCommand(new LoginUserCommand(userRepository, username, password));
     }
 
     @Override
     public boolean isUsernameTaken(String username) {
-        return userRepository.existsByUsername(username);
+        return executeCommand(new CheckUsernameTakenCommand(userRepository, username));
     }
 
     @Override
     public boolean isEmailTaken(String email) {
-        return userRepository.existsByEmail(email);
+        return executeCommand(new CheckEmailTakenCommand(userRepository, email));
     }
 
     @Override
     public List<UserDTO> searchUsers(String searchTerm) {
-        return userRepository.findByUsernameContainingOrEmailContainingOrFirstNameContainingOrLastNameContaining(
-                        searchTerm, searchTerm, searchTerm, searchTerm)
-                .stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-//    @Override
-//    public List<UserDTO> getUsersByRole(String role) {
-//        List<User> users = userRepository.findByUserRole(role);
-//        return users.stream()
-//                .map(this::convertToDTO)
-//                .collect(Collectors.toList());
-//    }
-
-    private void validateUserCreationInput(UserCreationRequestDTO dto) {
-        if (dto.getUsername() == null || dto.getUsername().trim().isEmpty()) {
-            throw new InvalidInputException("Username cannot be empty");
-        }
-        if (dto.getEmail() == null || dto.getEmail().trim().isEmpty()) {
-            throw new InvalidInputException("Email cannot be empty");
-        }
-        if (dto.getPassword() == null || dto.getPassword().trim().isEmpty()) {
-            throw new InvalidInputException("Password cannot be empty");
-        }
-    }
-
-    private String hashPassword(String password) {
-        // Implement proper password hashing here
-        return password;
-    }
-
-    private UserDTO convertToDTO(User user) {
-        UserDTO dto = new UserDTO();
-        dto.setUserId(user.getUserId());
-        dto.setUsername(user.getUsername());
-        dto.setEmail(user.getEmail());
-        dto.setPasswordHash(user.getPasswordHash());
-        dto.setFirstName(user.getFirstName());
-        dto.setLastName(user.getLastName());
-        dto.setPhoneNumber(user.getPhoneNumber());
-        dto.setCreatedAt(user.getCreatedAt());
-        dto.setIsActive(user.getIsActive());
-        dto.setLoyaltyPoints(user.getLoyaltyPoints());
-        dto.setCardNumber(user.getCardNumber());
-        dto.setExpiryMonth(user.getExpiryMonth());
-        dto.setExpiryYear(user.getExpiryYear());
-        dto.setCVV(user.getCVV());
-        dto.setIsDefaultCard(user.getIsDefaultCard());
-        return dto;
+        return executeCommand(new SearchUsersCommand(userRepository, searchTerm));
     }
 }
